@@ -1,6 +1,6 @@
 import numpy as np
 from warnings import warn
-from ._shared.utils import convert_to_float
+from .._shared.utils import convert_to_float
 from ._modified_nl_means import ( _RICE_nl_means_denoising_2d,
                                  _RICE_nl_means_denoising_3d)
 
