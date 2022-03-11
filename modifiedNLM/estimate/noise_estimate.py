@@ -1,6 +1,20 @@
 import numpy as np
 
+"""
+
+"""
+
 def rician_estimate(img):
+    """
+    
+    Parameters
+    ----------
+
+    Return
+    ------
+
+    """
+
     X = img.reshape(-1) 
     t=np.arange(0,len(X),1) 
     size=len(X)-2
