@@ -29,7 +29,7 @@ python3 setup.py build_ext --inplace
 
 ## Licence
 
-The majority of this code is based on the <a href="https://github.com/scikit-image/scikit-image">scikit-image</a> Non-Local Means. Then, as an redistribution with modifications we acknowledge their <a href= "https://github.com/scikit-image/scikit-image/blob/main/LICENSE.txt">LICENSE</a>. Other parts of the code that are not related with the scikit-image can be considered under a MIT License.
+The majority of this code is based on the <a href="https://github.com/scikit-image/scikit-image">scikit-image</a> Non-Local Means. Then, as an redistribution with modifications, we acknowledge their <a href= "https://github.com/scikit-image/scikit-image/blob/main/LICENSE.txt">LICENSE</a>. Other parts of the code that are not related with the scikit-image can be considered under a MIT License.
 
 ## Authors
 
