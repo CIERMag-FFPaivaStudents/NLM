@@ -239,9 +239,9 @@ def _RICE_nl_means_denoising_3d(cnp.ndarray[np_floats, ndim=3] image,
     cdef Py_ssize_t pln, row, col, i, j, k
     cdef Py_ssize_t offset = s / 2
     # padd the image so that boundaries are denoised as well
-    cdef np_floats [:, :, ::1] padded = np.ascontiguousarray(
+    cdef np_floats [:, :, :] padded = np.ascontiguousarray(
         np.pad(image, offset, mode='reflect'))
-    cdef np_floats [:, :, ::1] result = np.empty_like(image)
+    cdef np_floats [:, :, :] result = np.empty_like(image)
     cdef np_floats new_value
     cdef np_floats weight_sum, weight
 
