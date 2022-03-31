@@ -1,5 +1,5 @@
 """
-    Rafael Henrique, e-mail: rafaelhenri@usp.br, March 2022
+    Rafael Henrique, e-mail: rafaelhenri@usp.br, March 2022 # Não precisa de data
 
     Code for testing modifiedNLM package
 """
@@ -12,13 +12,13 @@ from ..filter.modified_nl_means import rician_denoise_nl_means
 from ..estimate.noise_estimate import rician_estimate
 
 def test_pass():
-
+    # precisa criar uma documentação pro teste
 
     input_img_path="modifiedNLM/tests/samples/t1_icbm_normal_1mm_pn0_rf0_rician_slice_20.nii"
 
     img = sitk.ReadImage(input_img_path)
 
-    img_vec = sitk.GetArrayFromImage(img)
+    img_vec = sitk.GetArrayFromImage(img) # tem que melhorar o nome. Não é um vetor
 
     sigma_est = np.mean(rician_estimate(img_vec))
 
