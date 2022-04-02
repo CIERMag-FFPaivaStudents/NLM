@@ -22,36 +22,11 @@ def test_pass():
     in execution time, using the same input image as expected denoised image. If both are equal, therefore modifiedNLM was correctly
     installed.
 
-    ----------------------------------------------
+    ----------
 
     Returns: Error if condition is not satisfied.
 
-    ----------------------------------------------
-
-    READ.md:
-
-        Examples: "example.py" file:
-
-        >>> from modifiedNLM import tests
-        >>> tests.test_pass()
-
-        "example.py" is in the same folder as modifiedNLM.
-
-        parent_folder
-                    |__example.py
-                    |__modifiedNLM
-
-                    If code above generates an error there is something wrong with this package.
-
-                    ----------------------------------------------
-
-                    About test sample images:
-
-                    input_image_test is a nifti image, with an axial slice of a brain in T1 weighted.
-
-                    output_image_test is a nifti image, input_image_test after denoising with rician_denoised_nl_means.
-
-                    output_image_test is the value expected after denoising.
+    -----------
 
     """
 
