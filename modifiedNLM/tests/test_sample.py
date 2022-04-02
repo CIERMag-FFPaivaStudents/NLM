@@ -1,6 +1,7 @@
-"""
-    Rafael Henrique, e-mail: rafaelhenri@usp.br
+#Name: Rafael Henrique
+#e-mail: rafaelhenri@usp.br
 
+"""
     Code for testing modifiedNLM package
 """
 
@@ -26,28 +27,31 @@ def test_pass():
     Returns: Error if condition is not satisfied.
 
     ----------------------------------------------
-    Examples: "example.py" file:
 
-    >>> from modifiedNLM import tests
-    >>> tests.test_pass()
+    READ.md:
 
-    "example.py" is in the same folder as modifiedNLM.
+        Examples: "example.py" file:
 
-    parent_folder
-                |__example.py
-                |__modifiedNLM
+        >>> from modifiedNLM import tests
+        >>> tests.test_pass()
 
-    If code above generates an error there is something wrong with this package.
+        "example.py" is in the same folder as modifiedNLM.
 
-    ----------------------------------------------
+        parent_folder
+                    |__example.py
+                    |__modifiedNLM
 
-    About test sample images:
+                    If code above generates an error there is something wrong with this package.
 
-    input_image_test is a nifti image, with an axial slice of a brain in T1 weighted.
+                    ----------------------------------------------
 
-    output_image_test is a nifti image, input_image_test after denoising with rician_denoised_nl_means.
+                    About test sample images:
 
-    output_image_test is the value expected after denoising.
+                    input_image_test is a nifti image, with an axial slice of a brain in T1 weighted.
+
+                    output_image_test is a nifti image, input_image_test after denoising with rician_denoised_nl_means.
+
+                    output_image_test is the value expected after denoising.
 
     """
 
@@ -63,8 +67,8 @@ def test_pass():
             patch_size=5,patch_distance=6,multichannel=False,preserve_range=True)
 
 
-    output_img_path="/samples/output_image_test.nii"
-    output_test_img = sitk.ReadImage(os.path.dirname(__file__)+output_img_path)
-    expected_array = sitk.GetArrayFromImage(output_test_img)
+    expected_img_path="/samples/expected_image_test.nii"
+    expected_test_img = sitk.ReadImage(os.path.dirname(__file__)+expected_img_path)
+    expected_array = sitk.GetArrayFromImage(expected_test_img)
 
     assert np.array_equal(expected_array, denoised_array), "\n There is something wrong! \n"
