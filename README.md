@@ -10,10 +10,17 @@ This repository have our recent studies on Rician Non-local Means (NLM).
       <a href="#">
         <img src="https://github.com/GustavoSolcia.png?size=100" width="100px;" alt="Foto do Gustavo Solcia no GitHub"/><br>
         <sub>
-          <a href="https://github.com/GustavoSolcia">Gustavo Solcia</a> 
+          <a href="https://github.com/GustavoSolcia">Gustavo Solcia</a>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/rafhenri.png?size=100" width="100px;" alt="Foto do Rafael Henrique no GitHub"/><br>
+        <sub>
+          <a href="https://github.com/rafhenri">Rafael Henrique</a>
         </sub>
       </a>
     </td>
   </tr>
 </table>
- 
