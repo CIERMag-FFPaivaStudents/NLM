@@ -21,13 +21,6 @@ def test_pass():
     This code compares an expected denoised image (We know this image was correctly denoised) with a denoised image generated
     in execution time, using the same input image as expected denoised image. If both are equal, therefore modifiedNLM was correctly
     installed.
-
-    ----------
-
-    Returns: Error if condition is not satisfied.
-
-    -----------
-
     """
 
     input_img_path="/samples/input_image_test.nii"
