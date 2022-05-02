@@ -24,12 +24,6 @@ import get_slice
 slice = get_slice.get_axial_Slice_from_Nifti("/../../../../../Volumes_Nifti/otsu_bet/t1_icbm_normal_1mm_pn0_rf0_otsu_brain.nii", 90)
 mask = get_slice.get_axial_Slice_from_Nifti("/../../../../../Volumes_Nifti/otsu_bet/t1_icbm_normal_1mm_pn0_rf0_otsu_brain_mask.nii", 90)
 
-#amount of noise in %
-noises = np.arange(0,20)
-
-#iterations over samples
-iterations = 500
-
 #CoC parallel
 def performCalc_Parallel_CoC(repchunks):
     """
@@ -163,7 +157,7 @@ def performCalc_Parallel_SSIM(repchunks):
     return np.asarray(vector_chunks)
 
 #Calculate a quality method
-def performCalc(func):
+def performCalc_old(func):
     """
     Routine to perform parallelResults from func.
 
@@ -196,7 +190,7 @@ def performCalc(func):
         vector.append([])
 
     count = 0
-    for k in parallelResults:
+    for k in parallelResults: #Não entendi pra que serve essa parte aqui
         if k.size>0:
             for i in noises:
                 vector[count].append(k[:,:,i])
@@ -204,8 +198,56 @@ def performCalc(func):
     vector = np.asarray(vector)
     return vector[:,:,0,:]
 
+def performCalc(func):
+
+    """
+
+
+    """
+
+    CoC = []
+    SNR = []
+    EPI = []
+    SSIM = []
+    for chunk in repChunk:
+        CoC_tmp = []
+        SNR_tmp = []
+        EPI_tmp = []
+        SSIM_tmp = []
+        [(CoC_tmp.append([]), SNR_tmp.append([]),
+              EPI_tmp.append([]), SSIM_tmp.append([])) for i in range(8) ]
+        for noise in noises:
+            DENOISED = samples.generate_denoised_samples_slices(slice, noise+1)
+            [(CoC_tmp[i].append(qm.CoC(slice,DENOISED[i],mask)),
+              SNR_tmp[i].append(qm.SNR(slice,DENOISED[i],mask)),
+              EPI_tmp[i].append(qm.EPI(slice,DENOISED[i],mask)),
+              SSIM_tmp[i].append(qm.SSIM(slice,DENOISED[i],mask))) for i in range(8) ]
+        CoC.append([CoC_tmp])
+        SNR.append([SNR_tmp])
+        EPI.append([EPI_tmp])
+        SSIM.append([SSIM_tmp])
+
+        return CoC, SNR, EPI, SSIM
 
 if __name__ == "__main__":
+   
+    #amount of noise in %
+    noises = np.arange(0,20)
+
+    iterationsNumber = sys.argv[1]
+
+    numThreads = os.cpu_count()
+    pool = ThreadPool(processes=numThreads)
+
+    rep=np.arange(iterations)
+
+    repchunks=np.array_split(rep,numThreads)
+
+    results =pool.map_async(func,repchunks)
+    pool.close()
+    pool.join()
+    parallelResults=results.get()
+    parallelResults = np.asarray(parallelResults)
 
     #perform SNR metric
     vector = performCalc(performCalc_Parallel_SNR)
