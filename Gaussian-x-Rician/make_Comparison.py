@@ -227,7 +227,7 @@ def performCalc(func):
         EPI.append([EPI_tmp])
         SSIM.append([SSIM_tmp])
 
-        return CoC, SNR, EPI, SSIM
+    return CoC, SNR, EPI, SSIM
 
 if __name__ == "__main__":
    
