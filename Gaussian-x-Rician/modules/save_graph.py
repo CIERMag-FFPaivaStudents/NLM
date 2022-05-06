@@ -59,14 +59,14 @@ def samples(path_to_save,save_name,method_name,noises, METHOD, it):
 
     plt.figure(figsize=(10,10))
 
-    plt.errorbar(noises,VEC[0],yerr=np.asarray(error_bar[0]),ecolor="black",ls="dotted", color="red", label="RrR")
-    plt.errorbar(noises,VEC[1], yerr=np.asarray(error_bar[1]),ecolor='black',ls='dotted', color='blue', label="RrG")
-    plt.errorbar(noises,VEC[2], yerr=np.asarray(error_bar[2]),ecolor='black',ls='dotted', color='green', label="RgG")
-    plt.errorbar(noises,VEC[3], yerr=np.asarray(error_bar[3]),ecolor='black',ls='dotted', color='black', label="RgR")
-    plt.errorbar(noises,VEC[4], yerr=np.asarray(error_bar[4]),ecolor='black', color='red', label="GrR")
-    plt.errorbar(noises,VEC[5], yerr=np.asarray(error_bar[5]),ecolor='black', color='blue', label="GrG")
-    plt.errorbar(noises,VEC[6], yerr=np.asarray(error_bar[6]),ecolor='black', color='green', label="GgG")
-    plt.errorbar(noises,VEC[7], yerr= np.asarray(error_bar[7]),ecolor='black', color='black', label="GgR")
+    plt.errorbar(noises,VEC[0],yerr=np.asarray(error_bar[0]),ecolor="black",ls="dotted", color="red", label="RrR", capsize=5)
+    plt.errorbar(noises,VEC[1], yerr=np.asarray(error_bar[1]),ecolor='black',ls='dotted', color='blue', label="RrG",capsize=5)
+    plt.errorbar(noises,VEC[2], yerr=np.asarray(error_bar[2]),ecolor='black',ls='dotted', color='green', label="RgG",capsize=5)
+    plt.errorbar(noises,VEC[3], yerr=np.asarray(error_bar[3]),ecolor='black',ls='dotted', color='black', label="RgR",capsize=5)
+    plt.errorbar(noises,VEC[4], yerr=np.asarray(error_bar[4]),ecolor='black', color='red', label="GrR", capsize=5)
+    plt.errorbar(noises,VEC[5], yerr=np.asarray(error_bar[5]),ecolor='black', color='blue', label="GrG", capsize=5)
+    plt.errorbar(noises,VEC[6], yerr=np.asarray(error_bar[6]),ecolor='black', color='green', label="GgG", capsize=5)
+    plt.errorbar(noises,VEC[7], yerr= np.asarray(error_bar[7]),ecolor='black', color='black', label="GgR", capsize=5)
 
     plt.legend()
 
