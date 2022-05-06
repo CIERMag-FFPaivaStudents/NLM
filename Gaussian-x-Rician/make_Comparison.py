@@ -24,6 +24,10 @@ import get_slice
 slice = get_slice.get_axial_Slice_from_Nifti("/../../../../../Volumes_Nifti/otsu_bet/t1_icbm_normal_1mm_pn0_rf0_otsu_brain.nii", 90)
 mask = get_slice.get_axial_Slice_from_Nifti("/../../../../../Volumes_Nifti/otsu_bet/t1_icbm_normal_1mm_pn0_rf0_otsu_brain_mask.nii", 90)
 
+#amount of noise in %
+noises = np.arange(0,5)
+
+
 #CoC parallel
 def performCalc_Parallel_CoC(repchunks):
     """
@@ -190,7 +194,7 @@ def performCalc_old(func):
         vector.append([])
 
     count = 0
-    for k in parallelResults: #Não entendi pra que serve essa parte aqui
+    for k in parallelResults:
         if k.size>0:
             for i in noises:
                 vector[count].append(k[:,:,i])
@@ -198,7 +202,7 @@ def performCalc_old(func):
     vector = np.asarray(vector)
     return vector[:,:,0,:]
 
-def performCalc(func):
+def performCalc(repchunks):
 
     """
 
@@ -209,7 +213,7 @@ def performCalc(func):
     SNR = []
     EPI = []
     SSIM = []
-    for chunk in repChunk:
+    for chunk in repchunks:
         CoC_tmp = []
         SNR_tmp = []
         EPI_tmp = []
@@ -227,27 +231,61 @@ def performCalc(func):
         EPI.append([EPI_tmp])
         SSIM.append([SSIM_tmp])
 
-    return CoC, SNR, EPI, SSIM
+    return (np.asarray(CoC), np.asarray(SNR), np.asarray(EPI), np.asarray(SSIM))
 
 if __name__ == "__main__":
-   
-    #amount of noise in %
-    noises = np.arange(0,20)
 
-    iterationsNumber = sys.argv[1]
+
+    iterationsNumber = int(sys.argv[1])
 
     numThreads = os.cpu_count()
+    if (iterationsNumber<numThreads):
+        numThreads = iterationsNumber
     pool = ThreadPool(processes=numThreads)
 
-    rep=np.arange(iterations)
+    rep=np.arange(iterationsNumber)
 
     repchunks=np.array_split(rep,numThreads)
 
-    results =pool.map_async(func,repchunks)
+    results =pool.map_async(performCalc,repchunks)
     pool.close()
     pool.join()
     parallelResults=results.get()
     parallelResults = np.asarray(parallelResults)
+
+    #12 threads
+    #[COC,SNR,EPI,SSIM]
+
+    vector=[]
+    for k in parallelResults:
+        vector.append(k[1][0][0])
+
+    vector = np.asarray(vector)
+
+    print(vector.shape)
+
+    '''
+
+    vector = []
+    for i in range(0,iterationsNumber):
+        vector.append([])
+
+    count = 0
+
+
+    for k in parallelResults:
+        if k[0].size>0:
+            for i in noises:
+                vector[count].append(k[1][:,:,i])
+            count+=1
+
+    '''
+
+    #vector = vector[:,:,0,:]
+    #print(vector.shape)
+    '''
+    save_graph.samples("results/t1/SNR/","t1_snr_samples","SNR",noises, vector, iterationsNumber)
+
 
     #perform SNR metric
     vector = performCalc(performCalc_Parallel_SNR)
@@ -264,3 +302,4 @@ if __name__ == "__main__":
     #perform EPI metric
     vector = performCalc(performCalc_Parallel_EPI)
     save_graph.samples("results/t1/EPI/","t1_epi_samples","EPI",noises, vector, iterations)
+    '''
