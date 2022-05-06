@@ -245,10 +245,10 @@ def separateResults(parallelResults, numThreads):
     SSIM = []
 
     for thread in range(numThreads):
-        [(CoC.append(result[0]),
-          SNR.append(result[1]),
-          EPI.append(result[2]),
-          SSIM.append(result[3])) for result in parallelResults[thread]]
+        [CoC.append(result) for result in parallelResults[thread][0]]
+        [SNR.append(result) for result in parallelResults[thread][1]]
+        [EPI.append(result) for result in parallelResults[thread][2]]
+        [SSIM.append(result) for result in parallelResults[thread][3]]
 
     return CoC, SNR, EPI, SSIM
 
