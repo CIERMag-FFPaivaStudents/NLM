@@ -39,5 +39,4 @@ Codes for comparing the efficiency of Non-Local Means using gaussian distributio
 
 ## Authors
 
-`Gaussian-x-Rician` was written by `Rafael Henrique <rafaelhenri@usp.br>`_.
-`Gaussian-x-Rician` was written by `Gustavo Solcia <gustavo.solcia@usp.br>`_.
+`Gaussian-x-Rician` was written by `Rafael Henrique <rafaelhenri@usp.br>` and `Gustavo Solcia <gustavo.solcia@usp.br>`_.
