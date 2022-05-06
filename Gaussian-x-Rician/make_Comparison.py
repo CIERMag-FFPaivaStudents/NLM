@@ -233,6 +233,25 @@ def performCalc(repchunks):
 
     return (np.asarray(CoC), np.asarray(SNR), np.asarray(EPI), np.asarray(SSIM))
 
+def separateResults(parallelResults, numThreads):
+    """
+
+
+    """
+
+    CoC = []
+    SNR = []
+    EPI = []
+    SSIM = []
+
+    for thread in range(numThreads):
+        [(CoC.append(result[0]),
+          SNR.append(result[1]),
+          EPI.append(result[2]),
+          SSIM.append(result[3])) for result in parallelResults[thread]]
+
+    return CoC, SNR, EPI, SSIM
+
 if __name__ == "__main__":
 
 
@@ -256,13 +275,17 @@ if __name__ == "__main__":
     #12 threads
     #[COC,SNR,EPI,SSIM]
 
-    vector=[]
-    for k in parallelResults:
-        vector.append(k[1][0][0])
+    #vector=[]
+    #for k in parallelResults:
+    #    vector.append(k[1][0][0])
 
-    vector = np.asarray(vector)
+    #vector = np.asarray(vector)
 
-    print(vector.shape)
+    #print(vector.shape)
+
+    CoC, SNR, EPI, SSIM = separateResults(parallelResults, numThreads)
+    print(CoC)
+    print(np.shape(CoC)
 
     '''
 
