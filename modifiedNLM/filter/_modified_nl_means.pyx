@@ -292,7 +292,7 @@ def _RICE_nl_means_denoising_3d(cnp.ndarray[np_floats, ndim=3] image,
 #                                                             k+offset]
                                 new_value += weight * padded[i+offset, # Rician Mod
                                                              j+offset,
-                                                             k+offset] * padded[i+offset,
+                                                             k+offset] * padded[i+offset, 
                                                              j+offset,
                                                              k+offset]
 
