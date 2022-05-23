@@ -48,11 +48,11 @@ def performCalc(repchunks):
         [(CoC_tmp.append([]), SNR_tmp.append([]),
               EPI_tmp.append([]), SSIM_tmp.append([])) for i in range(8) ]
         for noise in noises:
-            DENOISED = samples.generate_denoised_samples_slices(slice, noise+1)
-            [(CoC_tmp[i].append(qm.CoC(slice,DENOISED[i],mask)),
-              SNR_tmp[i].append(qm.SNR(slice,DENOISED[i],mask)),
-              EPI_tmp[i].append(qm.EPI(slice,DENOISED[i],mask)),
-              SSIM_tmp[i].append(qm.SSIM(slice,DENOISED[i],mask))) for i in range(8) ]
+            DENOISED = samples.generate_denoised_samples_slices(slice_image, noise+1)
+            [(CoC_tmp[i].append(qm.CoC(slice_image,DENOISED[i],mask)),
+              SNR_tmp[i].append(qm.SNR(slice_image,DENOISED[i],mask)),
+              EPI_tmp[i].append(qm.EPI(slice_image,DENOISED[i],mask)),
+              SSIM_tmp[i].append(qm.SSIM(slice_image,DENOISED[i],mask))) for i in range(8) ]
         CoC.append([CoC_tmp])
         SNR.append([SNR_tmp])
         EPI.append([EPI_tmp])
@@ -99,12 +99,11 @@ def separateResults(parallelResults, numThreads):
 if __name__ == "__main__":
 
     #get slice and mask
-    slice = get_slice.get_axial_Slice_from_Nifti("/../../../../../Volumes_Nifti/otsu_bet/t1_icbm_normal_1mm_pn0_rf0_otsu_brain.nii", 90)
+    slice_image = get_slice.get_axial_Slice_from_Nifti("/../../../../../Volumes_Nifti/otsu_bet/t1_icbm_normal_1mm_pn0_rf0_otsu_brain.nii", 90)
     mask = get_slice.get_axial_Slice_from_Nifti("/../../../../../Volumes_Nifti/otsu_bet/t1_icbm_normal_1mm_pn0_rf0_otsu_brain_mask.nii", 90)
 
     #amount of noise in %
-    noises = np.arange(0,5)
-
+    noises = np.arange(0,20)
 
     iterationsNumber = int(sys.argv[1])
 
@@ -126,7 +125,7 @@ if __name__ == "__main__":
 
     CoC, SNR, EPI, SSIM = separateResults(parallelResults, numThreads)
 
-    save_graph.samples("results/t1/CoC/","t1_coc_samples","SNR",noises, CoC, iterationsNumber)
+    save_graph.samples("results/t1/CoC/","t1_coc_samples","CoC",noises, CoC, iterationsNumber)
     save_graph.samples("results/t1/SNR/","t1_snr_samples","SNR",noises, SNR, iterationsNumber)
-    save_graph.samples("results/t1/EPI/","t1_epi_samples","SNR",noises, EPI, iterationsNumber)
-    save_graph.samples("results/t1/SSIM/","t1_ssim_samples","SNR",noises, SSIM, iterationsNumber)
+    save_graph.samples("results/t1/EPI/","t1_epi_samples","EPI",noises, EPI, iterationsNumber)
+    save_graph.samples("results/t1/SSIM/","t1_ssim_samples","SSIM",noises, SSIM, iterationsNumber)

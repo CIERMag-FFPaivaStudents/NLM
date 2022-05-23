@@ -59,13 +59,16 @@ def samples(path_to_save,save_name,method_name,noises, METHOD, it):
 
     plt.figure(figsize=(10,10))
 
-    plt.errorbar(noises,VEC[0],yerr=np.asarray(error_bar[0]),ecolor="black",ls="dotted", color="red", label="RrR", capsize=5)
-    plt.errorbar(noises,VEC[1], yerr=np.asarray(error_bar[1]),ecolor='black',ls='dotted', color='blue', label="RrG",capsize=5)
-    plt.errorbar(noises,VEC[2], yerr=np.asarray(error_bar[2]),ecolor='black',ls='dotted', color='green', label="RgG",capsize=5)
+    plt.errorbar(noises,VEC[0],yerr=np.asarray(error_bar[0]),ecolor='red',ls='dotted', color='red', label="RrR", capsize=5)
+    plt.errorbar(noises,VEC[1], yerr=np.asarray(error_bar[1]),ecolor='blue',ls='dotted', color='blue', label="RrG",capsize=5)
+
+    plt.errorbar(noises,VEC[2], yerr=np.asarray(error_bar[2]),ecolor='green',ls='dotted', color='green', label="RgG",capsize=5)
     plt.errorbar(noises,VEC[3], yerr=np.asarray(error_bar[3]),ecolor='black',ls='dotted', color='black', label="RgR",capsize=5)
-    plt.errorbar(noises,VEC[4], yerr=np.asarray(error_bar[4]),ecolor='black', color='red', label="GrR", capsize=5)
-    plt.errorbar(noises,VEC[5], yerr=np.asarray(error_bar[5]),ecolor='black', color='blue', label="GrG", capsize=5)
-    plt.errorbar(noises,VEC[6], yerr=np.asarray(error_bar[6]),ecolor='black', color='green', label="GgG", capsize=5)
+
+    plt.errorbar(noises,VEC[4], yerr=np.asarray(error_bar[4]),ecolor='red', color='red', label="GrR", capsize=5)
+    plt.errorbar(noises,VEC[5], yerr=np.asarray(error_bar[5]),ecolor='blue', color='blue', label="GrG", capsize=5)
+
+    plt.errorbar(noises,VEC[6], yerr=np.asarray(error_bar[6]),ecolor='green', color='green', label="GgG", capsize=5)
     plt.errorbar(noises,VEC[7], yerr= np.asarray(error_bar[7]),ecolor='black', color='black', label="GgR", capsize=5)
 
     plt.legend()
@@ -75,7 +78,7 @@ def samples(path_to_save,save_name,method_name,noises, METHOD, it):
     plt.ylabel(method_name);
     plt.title(method_name);
     plt.xticks(noises)
-    plt.xlim([1,np.max(noises)])
+    plt.xlim([-1,np.max(noises)+1])
 
     plt.savefig(path_to_save+save_name+".png")
     plt.cla()
