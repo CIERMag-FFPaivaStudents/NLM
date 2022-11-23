@@ -20,7 +20,7 @@ You need to build nl_means first, so inside folder nl_means build the codes with
 python3 setup.py build_ext --inplace
 
 ```
-## Licence
+## License
 
 
 The majority of this code is based on the <a href="https://github.com/scikit-image/scikit-image">scikit-image</a> Non-Local Means. Then, as an redistribution with modifications, we acknowledge their <a href= "https://github.com/scikit-image/scikit-image/blob/main/LICENSE.txt">LICENSE</a>. Other parts of the code that are not related with the scikit-image can be considered under a MIT License.
