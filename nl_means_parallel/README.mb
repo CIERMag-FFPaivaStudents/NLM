@@ -1,4 +1,4 @@
-#nl_means_parallel
+# nl_means_parallel
 
 A parallel Non-Local Means algorithm  based on scikit-image code.
 
