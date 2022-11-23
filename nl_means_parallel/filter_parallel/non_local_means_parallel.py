@@ -25,7 +25,7 @@ def denoise_nl_means_parallel(data_noisy, proc, h_value, fast_mode_value, patch_
 	
 	patch_distance_value: value of patch distance in NLM
 
-    return: same data_noisy array but after non-local means
+        return: same data_noisy array but after non-local means
 
 	'''
 
